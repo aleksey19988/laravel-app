@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', fn() => 'bbbb');
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
