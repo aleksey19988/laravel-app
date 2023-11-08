@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class PostController extends Controller
 {
@@ -13,9 +14,12 @@ class PostController extends Controller
     public function index()
     {
         /** @var Post $post */
-        $post = Post::query()->findOrFail(1);
+        $posts = Post::all();
 
-        dd($post);
+        dd($posts->reduce(function(Collection $carry, $item) {
+            $carry->push($item->title);
+            return $carry;
+        }, collect()));
     }
 
     /**
