@@ -13,7 +13,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        /** @var Post $post */
         $posts = Post::all();
 
         dd($posts->reduce(function(Collection $carry, $item) {
@@ -27,7 +26,24 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $postsArr = [
+            [
+                'title' => 'title_5',
+                'content' => 'content',
+                'likes' => 44,
+                'is_published' => true,
+            ],
+            [
+                'title' => 'title_6',
+                'content' => 'content_6',
+                'likes' => 55,
+                'is_published' => false,
+            ],
+        ];
+
+        foreach($postsArr as $post) {
+            Post::query()->create($post);
+        }
     }
 
     /**
@@ -59,7 +75,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post = Post::query()->first();
+        dd($post);
     }
 
     /**
@@ -68,5 +85,30 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function delete()
+    {
+        $post = Post::withTrashed()->first();
+        dd($post->restore());
+    }
+
+    public function firstOrCreate()
+    {
+        $post = Post::query()->firstOrCreate(['title' => 'title_1'], [
+            'title' => 'new title',
+            'content' => 'new content',
+        ]);
+
+        dd($post);
+    }
+
+    public function updateOrCreate()
+    {
+        $post = Post::query()->updateOrCreate(['title' => 'new title'], [
+            'title' => 'updated title',
+        ]);
+
+        dd($post);
     }
 }
