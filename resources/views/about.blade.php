@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="">
-        this is index page
-    </div>
+<div class="">
+    this is about page
+</div>
 @endsection

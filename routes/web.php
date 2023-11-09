@@ -17,7 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index']);
+Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index'])->name('index');
+Route::get('/main', fn() => view('main'))->name('main');
+Route::get('/contacts', fn() => view('contacts'))->name('contacts');
+Route::get('/about', fn() => view('about'))->name('about');
+
 Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create']);
 Route::get('/posts/update', [\App\Http\Controllers\PostController::class, 'update']);
 Route::get('/posts/delete', [\App\Http\Controllers\PostController::class, 'delete']);
