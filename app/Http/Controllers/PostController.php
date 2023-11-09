@@ -15,6 +15,8 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
+        return view('index', compact('posts'));
+
         dd($posts->reduce(function(Collection $carry, $item) {
             $carry->push($item->title);
             return $carry;
