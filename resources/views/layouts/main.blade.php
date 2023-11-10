@@ -9,24 +9,21 @@
     <title>Document</title>
 </head>
 <body>
-<div>
-    <div class="container">
+<div class="container">
+    <div class="row">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="{{ route('posts.index') }}">Navbar</a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Index</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('posts.create') }}">Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('contacts') }}">Contacts</a>
+                            <a class="nav-link active" aria-current="page" href="3">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('about') }}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('main') }}">Main</a>
+                            <a class="nav-link active" aria-current="page" href="#">Main</a>
                         </li>
                     </ul>
                 </div>

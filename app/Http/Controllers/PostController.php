@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('index', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
     /**
@@ -22,24 +22,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $postsArr = [
-            [
-                'title' => 'title_5',
-                'content' => 'content',
-                'likes' => 44,
-                'is_published' => true,
-            ],
-            [
-                'title' => 'title_6',
-                'content' => 'content_6',
-                'likes' => 55,
-                'is_published' => false,
-            ],
-        ];
-
-        foreach($postsArr as $post) {
-            Post::query()->create($post);
-        }
+        return view('post.create');
     }
 
     /**
@@ -47,7 +30,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => ['string', 'required'],
+            'content' => ['string', 'required'],
+        ]);
+        Post::query()->create($data);
+        return to_route('posts.index');
     }
 
     /**
@@ -55,7 +43,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('post.show', compact('post'));
     }
 
     /**
@@ -63,7 +51,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -71,8 +59,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post = Post::query()->first();
-        dd($post);
+        $data = $request->validate([
+            'title' => ['string', 'required'],
+            'content' => ['string', 'required'],
+        ]);
+        $post->update($data);
+        return view('post.show', compact('post'));
     }
 
     /**
@@ -80,31 +72,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
-    }
-
-    public function delete()
-    {
-        $post = Post::withTrashed()->first();
-        dd($post->restore());
-    }
-
-    public function firstOrCreate()
-    {
-        $post = Post::query()->firstOrCreate(['title' => 'title_1'], [
-            'title' => 'new title',
-            'content' => 'new content',
-        ]);
-
-        dd($post);
-    }
-
-    public function updateOrCreate()
-    {
-        $post = Post::query()->updateOrCreate(['title' => 'new title'], [
-            'title' => 'updated title',
-        ]);
-
-        dd($post);
+        $post->delete();
+        return view('post.index');
     }
 }
