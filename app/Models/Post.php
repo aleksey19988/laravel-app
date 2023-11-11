@@ -16,4 +16,9 @@ class Post extends Model
 
     protected $table = 'posts';
     protected $fillable = ['title', 'content', 'likes', 'is_published'];
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
 }
