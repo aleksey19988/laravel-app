@@ -3,7 +3,7 @@
 ?>
 @extends('layouts.main')
 @section('content')
-    <h1>Create new post</h1>
+    <h1>Edit post</h1>
     <form method="post" action="{{ route('posts.update', $post) }}">
         @csrf
         @method('patch')

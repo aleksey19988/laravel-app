@@ -40,7 +40,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['string', 'required'],
+            'title' => ['required', 'string'],
             'content' => ['string', 'required'],
             'category_id' => '',
             'tags' => '',
@@ -80,7 +80,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->validate([
-            'title' => ['string', 'required'],
+            'title' => ['required', 'string'],
             'content' => ['string', 'required'],
             'category_id' => '',
             'tags' => '',
