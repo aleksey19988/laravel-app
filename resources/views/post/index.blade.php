@@ -1,9 +1,10 @@
 @extends('layouts.main')
 @section('content')
     <h1>Posts</h1>
-    <table class="table">
+    <table class="table mb-3">
         <thead>
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Content</th>
                 <th scope="col">Likes</th>
@@ -15,6 +16,7 @@
         <tbody>
         @foreach($posts as $post)
             <tr>
+                <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->content }}</td>
                 <td>{{ $post->likes }}</td>
@@ -39,4 +41,7 @@
         @endforeach
         </tbody>
     </table>
+    <div class="pagination">
+        {{ $posts->links() }}
+    </div>
 @endsection

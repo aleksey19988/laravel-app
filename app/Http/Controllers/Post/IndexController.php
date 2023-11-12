@@ -10,7 +10,7 @@ class IndexController extends BaseController
 {
     public function __invoke()
     {
-        $posts = Post::all();
+        $posts = Post::query()->paginate(15);
         $categories = Category::all();
         $tags = Tag::all();
 
