@@ -1,3 +1,6 @@
+<?php
+  /** @var Illuminate\Pagination\LengthAwarePaginator $posts */
+?>
 @extends('layouts.main')
 @section('content')
     <h1>Posts</h1>
@@ -42,6 +45,6 @@
         </tbody>
     </table>
     <div class="pagination">
-        {{ $posts->links() }}
+        {{ $posts->withQueryString()->links() }}
     </div>
 @endsection
