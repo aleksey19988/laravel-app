@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -16,8 +17,10 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('posts', 'categories', 'tags'));
     }
 
     /**
@@ -26,8 +29,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('post.create', compact('categories'));
+        return view('post.create', compact('categories', 'tags'));
     }
 
     /**
@@ -39,8 +43,15 @@ class PostController extends Controller
             'title' => ['string', 'required'],
             'content' => ['string', 'required'],
             'category_id' => '',
+            'tags' => '',
         ]);
-        Post::query()->create($data);
+        $tags = $data['tags'];
+        unset($data['tags']);
+
+        /** @var Post $post */
+        $post = Post::query()->create($data);
+        $post->tags()->attach($tags);
+
         return to_route('posts.index');
     }
 

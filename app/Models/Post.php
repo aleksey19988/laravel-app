@@ -17,12 +17,12 @@ class Post extends Model
     protected $table = 'posts';
     protected $fillable = ['title', 'content', 'likes', 'is_published', 'category_id'];
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
     }
