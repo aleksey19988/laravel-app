@@ -16,7 +16,7 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->content }}</td>
                 <td>{{ $post->likes }}</td>
-                <td>
+                <td class="d-flex">
                     <a href="{{ route('posts.show', $post->id) }}"><button class="btn btn-outline-success">Show</button></a>
                     <a href="{{ route('posts.edit', $post->id) }}"><button class="btn btn-outline-warning">Edit</button></a>
                     <form action="{{ route('posts.destroy', $post->id) }}" method="post">

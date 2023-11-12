@@ -15,10 +15,15 @@ class Post extends Model
     use SoftDeletes;
 
     protected $table = 'posts';
-    protected $fillable = ['title', 'content', 'likes', 'is_published'];
+    protected $fillable = ['title', 'content', 'likes', 'is_published', 'category_id'];
 
     public function category()
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
     }
 }

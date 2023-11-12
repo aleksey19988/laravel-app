@@ -11,6 +11,14 @@
             <label for="content" class="form-label">Content</label>
             <textarea name="content" class="form-control" id="content" rows="3"></textarea>
         </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" aria-label="Default select example" id="category" name="category_id">
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 @endsection
