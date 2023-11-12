@@ -40,30 +40,17 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        $data = $request->validate([
-            'title' => ['required', 'string'],
-            'content' => ['string', 'required'],
-            'category_id' => '',
-            'tags' => '',
-        ]);
-        $tags = $data['tags'];
-        unset($data['tags']);
 
-        /** @var Post $post */
-        $post = Post::query()->create($data);
-        $post->tags()->attach($tags);
-
-        return to_route('posts.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show()
     {
-        return view('post.show', compact('post'));
+
     }
 
     /**

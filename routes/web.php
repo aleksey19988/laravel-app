@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Post\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
-Route::post('/posts', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/{post}', [ \App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/{post}/edit', [\App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
-Route::patch('/posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
-Route::delete('/posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+Route::group([], function() {
+    Route::get('/posts', IndexController::class)->name('posts.index');
+    Route::get('/posts/create', \App\Http\Controllers\Post\CreateController::class)->name('posts.create');
+    Route::post('/posts', \App\Http\Controllers\Post\StoreController::class)->name('posts.store');
+    Route::get('/posts/{post}', \App\Http\Controllers\Post\ShowController::class)->name('posts.show');
+    Route::get('/posts/{post}/edit', \App\Http\Controllers\Post\EditController::class)->name('posts.edit');
+    Route::patch('/posts/{post}', \App\Http\Controllers\Post\UpdateController::class)->name('posts.update');
+    Route::delete('/posts/{post}', \App\Http\Controllers\Post\DestroyController::class)->name('posts.destroy');
+});
