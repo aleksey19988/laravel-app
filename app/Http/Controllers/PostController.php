@@ -17,9 +17,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        $post = Post::query()->find(1);
         $categories = Category::all();
         $tags = Tag::all();
 
+        $tag = Tag::query()->find(1);
+        dd($post->tags);
         return view('post.index', compact('posts', 'categories', 'tags'));
     }
 
