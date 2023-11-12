@@ -30,7 +30,11 @@
             <label for="tags" class="form-label">Tags</label>
             <select class="form-select" multiple id="tags" name="tags[]">
                 @foreach($tags as $tag)
-                    <option {{ $category->id === $post->category_id ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->title }}</option>
+                    <option
+                    @foreach($post->tags as $postTag)
+                        {{ $tag->id === $postTag->id ? 'selected' : '' }}
+                    @endforeach
+                      value="{{ $tag->id }}">{{ $tag->title }}</option>
                 @endforeach
             </select>
         </div>

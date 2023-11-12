@@ -69,8 +69,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('post.edit', compact('post', 'categories'));
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -82,8 +83,13 @@ class PostController extends Controller
             'title' => ['string', 'required'],
             'content' => ['string', 'required'],
             'category_id' => '',
+            'tags' => '',
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+
         $post->update($data);
+        $post->tags()->sync($tags);
         return view('post.show', compact('post'));
     }
 
