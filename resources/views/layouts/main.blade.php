@@ -19,12 +19,12 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ route('posts.create') }}">Create</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="3">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Main</a>
-                        </li>
+                        @can('view', auth()->user())
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('posts.create') }}">Create
+                                    policy</a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>
